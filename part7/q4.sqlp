@@ -1,0 +1,273 @@
+SELECT z.`#text` as religion, count(z.`#text`) as num_countries, SUM(int(y.population) * float(z.`-percentage`) / 100) as total_population
+FROM geo.world x, x.mondial.country y,
+CASE  WHEN is_array(y.ethnicgroups) THEN y.ethnicgroups
+             WHEN y.ethnicgroups is missing THEN []
+             ELSE [y.ethnicgroups] END z
+GROUP BY z.`#text`
+ORDER BY count(z.`#text`) DESC;
+
+/*
+262 rows
+{ "num_countries": 23, "total_population": 3.2580452E7, "religion": "Chinese" }
+{ "num_countries": 20, "total_population": 2.36886416E8, "religion": "African" }
+{ "num_countries": 19, "total_population": 1.0987488E7, "religion": "European" }
+{ "num_countries": 18, "total_population": 5.4957132E7, "religion": "Indian" }
+{ "num_countries": 17, "total_population": 1.4594864E8, "religion": "Russian" }
+{ "num_countries": 13, "total_population": 7.2373952E7, "religion": "Arab" }
+{ "num_countries": 10, "total_population": 4.386568E7, "religion": "Ukrainian" }
+{ "num_countries": 9, "total_population": 8.922776E7, "religion": "German" }
+{ "num_countries": 8, "total_population": 1.3141679E7, "religion": "Asian" }
+{ "num_countries": 8, "total_population": 8403058.0, "religion": "Serb" }
+{ "num_countries": 7, "total_population": 3.8881176E7, "religion": "Polish" }
+{ "num_countries": 7, "total_population": 5418985.0, "religion": "Jewish" }
+{ "num_countries": 7, "total_population": 403303.66, "religion": "Polynesian" }
+{ "num_countries": 6, "total_population": 2.9245258E7, "religion": "Amerindian" }
+{ "num_countries": 6, "total_population": 4039510.8, "religion": "Armenian" }
+{ "num_countries": 6, "total_population": 1.1828286E7, "religion": "Hungarian" }
+{ "num_countries": 6, "total_population": 9.9101424E7, "religion": "Malay" }
+{ "num_countries": 6, "total_population": 3221855.0, "religion": "White" }
+{ "num_countries": 6, "total_population": 9684748.0, "religion": "Byelorussian" }
+{ "num_countries": 6, "total_population": 1185437.5, "religion": "Roma" }
+{ "num_countries": 6, "total_population": 2.0872672E7, "religion": "Uzbek" }
+{ "num_countries": 5, "total_population": 7836658.5, "religion": "French" }
+{ "num_countries": 5, "total_population": 397552.9, "religion": "Black" }
+{ "num_countries": 5, "total_population": 4651366.0, "religion": "Croat" }
+{ "num_countries": 4, "total_population": 5171433.0, "religion": "Albanian" }
+{ "num_countries": 4, "total_population": 827784.4, "religion": "Creole" }
+{ "num_countries": 4, "total_population": 2.597025E7, "religion": "Caucasian" }
+{ "num_countries": 4, "total_population": 612766.06, "religion": "Italian" }
+{ "num_countries": 4, "total_population": 8231002.0, "religion": "Kazak" }
+{ "num_countries": 3, "total_population": 2573656.5, "religion": "Afar" }
+{ "num_countries": 3, "total_population": 6.724164E7, "religion": "Arab-Berber" }
+{ "num_countries": 3, "total_population": 7310694.0, "religion": "Azeri" }
+{ "num_countries": 3, "total_population": 877172.0, "religion": "East Indian" }
+{ "num_countries": 3, "total_population": 149349.72, "religion": "Europeans" }
+{ "num_countries": 3, "total_population": 179981.34, "religion": "Iranian" }
+{ "num_countries": 3, "total_population": 651151.94, "religion": "Melanesian" }
+{ "num_countries": 3, "total_population": 145475.53, "religion": "Micronesian" }
+{ "num_countries": 3, "total_population": 1073922.6, "religion": "Muslim" }
+{ "num_countries": 3, "total_population": 137746.8, "religion": "Pacific Islander" }
+{ "num_countries": 3, "total_population": 4995482.0, "religion": "Slovak" }
+{ "num_countries": 3, "total_population": 1.1880163E7, "religion": "Somali" }
+{ "num_countries": 3, "total_population": 6531153.0, "religion": "Tatar" }
+{ "num_countries": 3, "total_population": 25278.082, "religion": "Mixed" }
+{ "num_countries": 3, "total_population": 1816880.1, "religion": "Slovene" }
+{ "num_countries": 3, "total_population": 1.0606424E7, "religion": "Tajik" }
+{ "num_countries": 3, "total_population": 5.1993076E7, "religion": "Turkish" }
+{ "num_countries": 3, "total_population": 6.3426668E7, "religion": "Vietnamese" }
+{ "num_countries": 2, "total_population": 1.0661966E7, "religion": "Greek" }
+{ "num_countries": 2, "total_population": 1.571024E7, "religion": "Kurdish" }
+{ "num_countries": 2, "total_population": 1582941.6, "religion": "Macedonian" }
+{ "num_countries": 2, "total_population": 3847463.2, "religion": "Malinke" }
+{ "num_countries": 2, "total_population": 355451.44, "religion": "Montenegrin" }
+{ "num_countries": 2, "total_population": 150768.0, "religion": "Norman-French" }
+{ "num_countries": 2, "total_population": 1.936655E7, "religion": "Romanian" }
+{ "num_countries": 2, "total_population": 256928.5, "religion": "Samoan" }
+{ "num_countries": 2, "total_population": 1704172.8, "religion": "South Asian" }
+{ "num_countries": 2, "total_population": 186602.5, "religion": "Bosniak" }
+{ "num_countries": 2, "total_population": 7435959.0, "religion": "Bulgarian" }
+{ "num_countries": 2, "total_population": 9796881.0, "religion": "Czech" }
+{ "num_countries": 2, "total_population": 159808.23, "religion": "Filipino" }
+{ "num_countries": 2, "total_population": 2971923.0, "religion": "Fulani" }
+{ "num_countries": 2, "total_population": 97401.82, "religion": "Indonesian" }
+{ "num_countries": 2, "total_population": 9.3041984E7, "religion": "Javanese" }
+{ "num_countries": 2, "total_population": 3.0810186E7, "religion": "Mongol" }
+{ "num_countries": 2, "total_population": 1993477.0, "religion": "Palestinian Arab" }
+{ "num_countries": 2, "total_population": 4605846.5, "religion": "Peuhl" }
+{ "num_countries": 2, "total_population": 1191016.4, "religion": "Spanish" }
+{ "num_countries": 2, "total_population": 1694366.1, "religion": "Tuareg" }
+{ "num_countries": 2, "total_population": 4363310.0, "religion": "Turkmen" }
+{ "num_countries": 1, "total_population": 3818.5, "religion": "African descent" }
+{ "num_countries": 1, "total_population": 1940905.8, "religion": "Afro-Asian" }
+{ "num_countries": 1, "total_population": 31143.3, "religion": "Afro-Chinese" }
+{ "num_countries": 1, "total_population": 4962150.0, "religion": "Amerindian Amerindian" }
+{ "num_countries": 1, "total_population": 21829.8, "religion": "Andorran" }
+{ "num_countries": 1, "total_population": 703187.5, "religion": "Arab Iranian" }
+{ "num_countries": 1, "total_population": 1071114.5, "religion": "Assyrian" }
+{ "num_countries": 1, "total_population": 1007908.8, "religion": "Bagisu" }
+{ "num_countries": 1, "total_population": 1321885.2, "religion": "Baloch" }
+{ "num_countries": 1, "total_population": 3395362.2, "religion": "Baoule" }
+{ "num_countries": 1, "total_population": 1333606.4, "religion": "Bashkir" }
+{ "num_countries": 1, "total_population": 1612654.1, "religion": "Basogo" }
+{ "num_countries": 1, "total_population": 6809.0, "religion": "Basques Bretons" }
+{ "num_countries": 1, "total_population": 604745.25, "religion": "Batobo" }
+{ "num_countries": 1, "total_population": 1403748.5, "religion": "Batswana" }
+{ "num_countries": 1, "total_population": 391859.1, "religion": "Beri Beri" }
+{ "num_countries": 1, "total_population": 2657240.2, "religion": "Bete" }
+{ "num_countries": 1, "total_population": 911312.5, "religion": "Bhote" }
+{ "num_countries": 1, "total_population": 934419.2, "religion": "Black Maur" }
+{ "num_countries": 1, "total_population": 604745.25, "religion": "Bunyoro" }
+{ "num_countries": 1, "total_population": 4421082.5, "religion": "Cameroon Highlanders" }
+{ "num_countries": 1, "total_population": 82926.0, "religion": "Carib Indians" }
+{ "num_countries": 1, "total_population": 270292.0, "religion": "Celt" }
+{ "num_countries": 1, "total_population": 66197.52, "religion": "Chamorro" }
+{ "num_countries": 1, "total_population": 42121.52, "religion": "Circassian" }
+{ "num_countries": 1, "total_population": 3589937.5, "religion": "Colored" }
+{ "num_countries": 1, "total_population": 8148.42, "religion": "Danish" }
+{ "num_countries": 1, "total_population": 818347.44, "religion": "Diola" }
+{ "num_countries": 1, "total_population": 2.38026912E8, "religion": "Dravidian" }
+{ "num_countries": 1, "total_population": 2709695.8, "religion": "Equatorial Bantu" }
+{ "num_countries": 1, "total_population": 897548.25, "religion": "Estonian" }
+{ "num_countries": 1, "total_population": 14241.82, "religion": "European Chinese" }
+{ "num_countries": 1, "total_population": 90927.49, "religion": "European Lebanese" }
+{ "num_countries": 1, "total_population": 16053.709, "religion": "Finn" }
+{ "num_countries": 1, "total_population": 5593632.5, "religion": "Fleming" }
+{ "num_countries": 1, "total_population": 22805.12, "religion": "Franco-Mauritian" }
+{ "num_countries": 1, "total_population": 15350.72, "religion": "Garifuna" }
+{ "num_countries": 1, "total_population": 3659086.8, "religion": "Georgian" }
+{ "num_countries": 1, "total_population": 5287541.0, "religion": "Gilaki Mazandarani" }
+{ "num_countries": 1, "total_population": 97474.08, "religion": "Greeks" }
+{ "num_countries": 1, "total_population": 63121.05, "religion": "Gypsy" }
+{ "num_countries": 1, "total_population": 1.11199462E9, "religion": "Han Chinese" }
+{ "num_countries": 1, "total_population": 5103280.5, "religion": "Hausa" }
+{ "num_countries": 1, "total_population": 4306186.0, "religion": "Hazara" }
+{ "num_countries": 1, "total_population": 5482687.5, "religion": "Hutu" }
+{ "num_countries": 1, "total_population": 6.8551757E8, "religion": "Indo-Aryan" }
+{ "num_countries": 1, "total_population": 432310.1, "religion": "Inuit" }
+{ "num_countries": 1, "total_population": 1612654.1, "religion": "Iteso" }
+{ "num_countries": 1, "total_population": 491785.97, "religion": "Karakalpak" }
+{ "num_countries": 1, "total_population": 9775096.0, "religion": "Khmer" }
+{ "num_countries": 1, "total_population": 2585724.8, "religion": "Kimbundu" }
+{ "num_countries": 1, "total_population": 1568771.2, "religion": "Kirdi" }
+{ "num_countries": 1, "total_population": 4626598.5, "religion": "Kurd" }
+{ "num_countries": 1, "total_population": 3383525.0, "religion": "Lao Loum" }
+{ "num_countries": 1, "total_population": 447819.47, "religion": "Lao Soung Hmong Yao" }
+{ "num_countries": 1, "total_population": 806327.06, "religion": "Lugbara" }
+{ "num_countries": 1, "total_population": 3662969.2, "religion": "Luo" }
+{ "num_countries": 1, "total_population": 130977.04, "religion": "MBaka" }
+{ "num_countries": 1, "total_population": 4826630.5, "religion": "Mande" }
+{ "num_countries": 1, "total_population": 818347.44, "religion": "Mandingo" }
+{ "num_countries": 1, "total_population": 315770.47, "religion": "Maori" }
+{ "num_countries": 1, "total_population": 700814.4, "religion": "Maur" }
+{ "num_countries": 1, "total_population": 24122.56, "religion": "Maya" }
+{ "num_countries": 1, "total_population": 130977.04, "religion": "Mboum" }
+{ "num_countries": 1, "total_population": 3.9181116E7, "religion": "Mediterranean Nordic" }
+{ "num_countries": 1, "total_population": 6315463.5, "religion": "Mestizo - Amerindian-Spanish" }
+{ "num_countries": 1, "total_population": 192991.64, "religion": "Mixed Black" }
+{ "num_countries": 1, "total_population": 1037249.4, "religion": "Moldavian" }
+{ "num_countries": 1, "total_population": 2879181.5, "religion": "Moldavian/Romanian" }
+{ "num_countries": 1, "total_population": 5958.34, "religion": "Nauruan" }
+{ "num_countries": 1, "total_population": 1172.264, "religion": "Norwegian" }
+{ "num_countries": 1, "total_population": 3826872.8, "religion": "Ovimbundu" }
+{ "num_countries": 1, "total_population": 98596.98, "religion": "Pakistani" }
+{ "num_countries": 1, "total_population": 2149577.0, "religion": "Quechua" }
+{ "num_countries": 1, "total_population": 937.38794, "religion": "Russian Ukrainian" }
+{ "num_countries": 1, "total_population": 16123.086, "religion": "Ruthenian" }
+{ "num_countries": 1, "total_population": 1209490.5, "religion": "Rwanda" }
+{ "num_countries": 1, "total_population": 102836.49, "religion": "Saho" }
+{ "num_countries": 1, "total_population": 43857.0, "religion": "Scandinavian" }
+{ "num_countries": 1, "total_population": 2214366.8, "religion": "Senoufou" }
+{ "num_countries": 1, "total_population": 5145449.5, "religion": "Sidamo" }
+{ "num_countries": 1, "total_population": 1.3729275E7, "religion": "Sinhalese" }
+{ "num_countries": 1, "total_population": 1964868.6, "religion": "Sotho" }
+{ "num_countries": 1, "total_population": 1.803134E7, "religion": "Taiwanese" }
+{ "num_countries": 1, "total_population": 3339553.2, "religion": "Tamil" }
+{ "num_countries": 1, "total_population": 4.4138516E7, "religion": "Thai" }
+{ "num_countries": 1, "total_population": 1371153.2, "religion": "Tigre Kunama" }
+{ "num_countries": 1, "total_population": 1713941.5, "religion": "Tigrinya" }
+{ "num_countries": 1, "total_population": 2625.12, "religion": "Tongan" }
+{ "num_countries": 1, "total_population": 818347.44, "religion": "Toucouleur" }
+{ "num_countries": 1, "total_population": 732084.3, "religion": "Turk" }
+{ "num_countries": 1, "total_population": 68533.59, "religion": "Twa" }
+{ "num_countries": 1, "total_population": 3356179.5, "religion": "Walloon" }
+{ "num_countries": 1, "total_population": 1111309.5, "religion": "Welsh" }
+{ "num_countries": 1, "total_population": 3273389.8, "religion": "Wolof" }
+{ "num_countries": 1, "total_population": 1104394.8, "religion": "black-Indian" }
+{ "num_countries": 1, "total_population": 1068114.5, "religion": "foreign-born first-generation" }
+{ "num_countries": 1, "total_population": 93956.58, "religion": "Abkhaz" }
+{ "num_countries": 1, "total_population": 806327.06, "religion": "Acholi" }
+{ "num_countries": 1, "total_population": 359235.9, "religion": "African-white-Indian" }
+{ "num_countries": 1, "total_population": 77858.25, "religion": "Afro-East Indian" }
+{ "num_countries": 1, "total_population": 391886.53, "religion": "Afro-European" }
+{ "num_countries": 1, "total_population": 29565.9, "religion": "Alemannic" }
+{ "num_countries": 1, "total_population": 105489.45, "religion": "Americo-Liberians" }
+{ "num_countries": 1, "total_population": 275207.3, "religion": "Amerindians" }
+{ "num_countries": 1, "total_population": 1.8294932E7, "religion": "Amhara Tigrean" }
+{ "num_countries": 1, "total_population": 1791314.2, "religion": "Aymara" }
+{ "num_countries": 1, "total_population": 1.5862623E7, "religion": "Azerbaijani" }
+{ "num_countries": 1, "total_population": 3426890.0, "religion": "Baganda" }
+{ "num_countries": 1, "total_population": 371726.47, "religion": "Bahraini" }
+{ "num_countries": 1, "total_population": 1344576.8, "religion": "Bakongo" }
+{ "num_countries": 1, "total_population": 884095.06, "religion": "Banda" }
+{ "num_countries": 1, "total_population": 1113304.8, "religion": "Baya" }
+{ "num_countries": 1, "total_population": 1892852.6, "religion": "Beja" }
+{ "num_countries": 1, "total_population": 1.20601552E8, "religion": "Bengali" }
+{ "num_countries": 1, "total_population": 5282073.0, "religion": "Berber Arab" }
+{ "num_countries": 1, "total_population": 48.0, "religion": "Bounty" }
+{ "num_countries": 1, "total_population": 1.1528269E7, "religion": "British Isles" }
+{ "num_countries": 1, "total_population": 3.1263424E7, "religion": "Burman" }
+{ "num_countries": 1, "total_population": 2110.0798, "religion": "Christian" }
+{ "num_countries": 1, "total_population": 1778141.9, "religion": "Chuvash" }
+{ "num_countries": 1, "total_population": 245662.5, "religion": "Dagestani Peoples" }
+{ "num_countries": 1, "total_population": 2004860.1, "religion": "Djerma" }
+{ "num_countries": 1, "total_population": 1.4945313E7, "religion": "Dutch" }
+{ "num_countries": 1, "total_population": 6.2939356E7, "religion": "Eastern Hamitic" }
+{ "num_countries": 1, "total_population": 998308.94, "religion": "Eastern Nigritic" }
+{ "num_countries": 1, "total_population": 580894.06, "religion": "Emiri" }
+{ "num_countries": 1, "total_population": 4.7669328E7, "religion": "English" }
+{ "num_countries": 1, "total_population": 35755.855, "religion": "Euro-African" }
+{ "num_countries": 1, "total_population": 15006.88, "religion": "Euronesians" }
+{ "num_countries": 1, "total_population": 1.3616595E7, "religion": "European European-Indian" }
+{ "num_countries": 1, "total_population": 45705.3, "religion": "European Syrian-Lebanese" }
+{ "num_countries": 1, "total_population": 82452.0, "religion": "European/Caribbean Indian" }
+{ "num_countries": 1, "total_population": 383366.7, "religion": "Fijian" }
+{ "num_countries": 1, "total_population": 774605.1, "religion": "Fula" }
+{ "num_countries": 1, "total_population": 156234.64, "religion": "Gagauz" }
+{ "num_countries": 1, "total_population": 109356.02, "religion": "Gourmantche" }
+{ "num_countries": 1, "total_population": 50054.58, "religion": "Greenlander" }
+{ "num_countries": 1, "total_population": 1143433.2, "religion": "Gurage" }
+{ "num_countries": 1, "total_population": 161474.66, "religion": "Hindustani" }
+{ "num_countries": 1, "total_population": 775374.06, "religion": "Indo-Mauritian" }
+{ "num_countries": 1, "total_population": 1403759.5, "religion": "Irish" }
+{ "num_countries": 1, "total_population": 1.24697008E8, "religion": "Japanese" }
+{ "num_countries": 1, "total_population": 3381202.2, "religion": "Kalenjin" }
+{ "num_countries": 1, "total_population": 3099435.5, "religion": "Kamba" }
+{ "num_countries": 1, "total_population": 2418981.0, "religion": "Karamojong" }
+{ "num_countries": 1, "total_population": 3218293.8, "religion": "Karen" }
+{ "num_countries": 1, "total_population": 59105.2, "religion": "Kgalagadi" }
+{ "num_countries": 1, "total_population": 6198871.0, "religion": "Kikuyu" }
+{ "num_countries": 1, "total_population": 2373535.8, "religion": "Kirghiz" }
+{ "num_countries": 1, "total_population": 1690601.1, "religion": "Kisii" }
+{ "num_countries": 1, "total_population": 877521.1, "religion": "Kuwaiti" }
+{ "num_countries": 1, "total_population": 1209490.5, "religion": "Langi" }
+{ "num_countries": 1, "total_population": 1094669.9, "religion": "Lao Theung" }
+{ "num_countries": 1, "total_population": 1278932.6, "religion": "Latvian" }
+{ "num_countries": 1, "total_population": 2920478.8, "religion": "Lithuanian" }
+{ "num_countries": 1, "total_population": 3944736.0, "religion": "Luhya" }
+{ "num_countries": 1, "total_population": 1321885.2, "religion": "Lur" }
+{ "num_countries": 1, "total_population": 1.5495869E7, "religion": "Madurese" }
+{ "num_countries": 1, "total_population": 687629.44, "religion": "Mandjia" }
+{ "num_countries": 1, "total_population": 2.0924344E7, "religion": "Mangbetu-Azande" }
+{ "num_countries": 1, "total_population": 1690601.1, "religion": "Meru" }
+{ "num_countries": 1, "total_population": 919512.5, "religion": "Mon" }
+{ "num_countries": 1, "total_population": 5075.04, "religion": "Monegasque" }
+{ "num_countries": 1, "total_population": 2549597.5, "religion": "Mossi" }
+{ "num_countries": 1, "total_population": 664.056, "religion": "Mulatto" }
+{ "num_countries": 1, "total_population": 2131810.2, "religion": "Native American" }
+{ "num_countries": 1, "total_population": 637918.75, "religion": "Nepalese" }
+{ "num_countries": 1, "total_population": 989.1, "religion": "None" }
+{ "num_countries": 1, "total_population": 1140924.5, "religion": "Northwestern Bantu" }
+{ "num_countries": 1, "total_population": 2.2868664E7, "religion": "Oromo" }
+{ "num_countries": 1, "total_population": 156594.3, "religion": "Ossetian" }
+{ "num_countries": 1, "total_population": 8612372.0, "religion": "Pashtun" }
+{ "num_countries": 1, "total_population": 3.3708076E7, "religion": "Persian" }
+{ "num_countries": 1, "total_population": 14905.11, "religion": "Portuguese" }
+{ "num_countries": 1, "total_population": 1839025.0, "religion": "Rakhine" }
+{ "num_countries": 1, "total_population": 327442.6, "religion": "Sara" }
+{ "num_countries": 1, "total_population": 5615038.0, "religion": "Scottish" }
+{ "num_countries": 1, "total_population": 1545767.4, "religion": "Serer" }
+{ "num_countries": 1, "total_population": 77575.0, "religion": "Seychellois" }
+{ "num_countries": 1, "total_population": 4137806.5, "religion": "Shan" }
+{ "num_countries": 1, "total_population": 3430299.8, "religion": "Shankella" }
+{ "num_countries": 1, "total_population": 34207.68, "religion": "Sino-Mauritian" }
+{ "num_countries": 1, "total_population": 579195.7, "religion": "Songhai" }
+{ "num_countries": 1, "total_population": 1482396.1, "religion": "Soussou" }
+{ "num_countries": 1, "total_population": 2.8925624E7, "religion": "Sundanese" }
+{ "num_countries": 1, "total_population": 1302138.2, "religion": "Tutsi" }
+{ "num_countries": 1, "total_population": 1052819.5, "religion": "Ulster" }
+{ "num_countries": 1, "total_population": 185530.73, "religion": "Vedda" }
+{ "num_countries": 1, "total_population": 49757.72, "religion": "Vietnamese/Chinese" }
+{ "num_countries": 1, "total_population": 1158391.4, "religion": "Voltaic" }
+{ "num_countries": 1, "total_population": 20469.24, "religion": "Wallisian" }
+{ "num_countries": 1, "total_population": 371713.16, "religion": "West Indian" }
+*/

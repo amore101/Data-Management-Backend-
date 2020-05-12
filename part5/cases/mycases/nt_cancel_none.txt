@@ -1,0 +1,13 @@
+create user1 user1 100000
+login user1 user1
+cancel 2
+quit
+*
+#
+# expected printouts for user 1
+#
+Created user user1
+Logged in as user1
+Failed to cancel reservation 2
+Goodbye
+*

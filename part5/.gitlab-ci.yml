@@ -1,0 +1,5 @@
+submission_test:
+  script:
+    - python3 -u /opt/courses/cse344/20wi/gitlab-ci/scripts/student_main.py
+  tags:
+    - shell

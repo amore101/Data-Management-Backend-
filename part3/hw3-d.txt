@@ -1,0 +1,14 @@
+Using Azure was an interesting experience. While setting up the environment was more difficult than, say, SQLite, it was clear that there would be long term advantages to hosting our database in the cloud rather than locally. For example, the speed of execution was quicker for expensive queries. Using a paid service backed by a large company had its benefits, such as better integration into text editors like Visual Studio Code. Getting used to a DBMS with stricter syntax requirements than SQLite was difficult at first, but became easier over time.
+
+Advantages: 
+Lower cost - Reduce operating costs and expenses in terms of hardware, software licensing, and service implementation.
+More scalable and flexible
+More efficient
+Less maintanence
+Universal access (with internet connection)
+
+Disadvantages:
+Risk of accidental data loss
+Privacy security issues
+Slow to access than local DB
+Requires internet connection

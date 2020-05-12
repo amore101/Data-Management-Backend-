@@ -1,0 +1,40 @@
+USE geoindex;
+
+WITH t AS 
+    (WITH groups AS (SELECT DISTINCT country1 as country_first, country2 as country_second, m.name AS mountain_name, s.name as sea_name
+                FROM mountain as m, sea as s,
+                    split(m.`-country`, " ") as mountain_country_one,
+                    split(s.`-country`, " ") as sea_country_one,
+                    split(m.`-country`, " ") as mountain_country_two,
+                    split(s.`-country`, " ") as sea_country_two
+                    LET country1 = (SELECT DISTINCT c.name
+                                    FROM country as c
+                                    WHERE c.`-car_code` = mountain_country_one),
+                        country2 = (SELECT DISTINCT c.name
+                                    FROM country as c
+                                    WHERE c.`-car_code` = mountain_country_two)
+                WHERE mountain_country_one != mountain_country_two AND mountain_country_one = sea_country_one AND mountain_country_two = sea_country_two
+                AND to_atomic(country1) < to_atomic(country2))
+    SELECT to_atomic(g.country_first) as first_country, to_atomic(g.country_second) as second_country, g.mountain_name as mountains, g.sea_name as seas
+    FROM groups as g)
+    SELECT DISTINCT t1.first_country, t1.second_country, mountains, seas
+    FROM t AS t1
+
+LET mountains_all = (SELECT t2.first_country, t2.second_country, t2.mountains FROM t as t2),
+mountains = (SELECT DISTINCT all_mounts.mountains AS mountain 
+FROM mountains_all as all_mounts 
+WHERE all_mounts.first_country = t1.first_country
+AND all_mounts.second_country = t1.second_country),
+seas_all = (SELECT t2.first_country, t2.second_country, t2.seas FROM t as t2),
+seas = (SELECT DISTINCT ALS.seas AS sea FROM seas_all as ALS WHERE ALS.first_country = t1.first_country AND ALS.second_country = t1.second_country);
+
+/*
+7 rows
+{ "mountains": [ { "mountain": "Sulitjelma" } ], "seas": [ { "sea": "Skagerrak" } ], "first_country": "Norway", "second_country": "Sweden" }
+{ "mountains": [ { "mountain": "Kasbek" } ], "seas": [ { "sea": "Black Sea" } ], "first_country": "Georgia", "second_country": "Russia" }
+{ "mountains": [ { "mountain": "Mont Blanc" } ], "seas": [ { "sea": "Mediterranean Sea" } ], "first_country": "France", "second_country": "Italy" }
+{ "mountains": [ { "mountain": "Changbai Shan" } ], "seas": [ { "sea": "Yellow Sea" } ], "first_country": "China", "second_country": "North Korea" }
+{ "mountains": [ { "mountain": "Vignemale" } ], "seas": [ { "sea": "Atlantic Ocean" }, { "sea": "Mediterranean Sea" } ], "first_country": "France", "second_country": "Spain" }
+{ "mountains": [ { "mountain": "Llullaillaco" }, { "mountain": "Ojos del Salado" } ], "seas": [ { "sea": "Atlantic Ocean" } ], "first_country": "Argentina", "second_country": "Chile" }
+{ "mountains": [ { "mountain": "Mt Bona" }, { "mountain": "Mt St.Elias" }, { "mountain": "Mt Fairweather" } ], "seas": [ { "sea": "Arctic Ocean" }, { "sea": "Pacific Ocean" }, { "sea": "Atlantic Ocean" } ], "first_country": "Canada", "second_country": "United States" }
+*/

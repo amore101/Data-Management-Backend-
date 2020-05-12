@@ -1,0 +1,7 @@
+search "Seattle WA" "Vancouver BC" 0 1 10
+quit
+*
+#
+No flights match your selection
+Goodbye
+*

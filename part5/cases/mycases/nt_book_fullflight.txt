@@ -1,0 +1,18 @@
+create user1 user1 1000
+login user1 user1
+search "Dallas/Fort Worth TX" "Abilene TX" 1 1 1
+book 0
+book 0
+quit
+*
+#
+# expected printouts for user 1
+#
+Created user user1
+Logged in as user1
+Itinerary 0: 1 flight(s), 39 minutes
+ID: 272378 Day: 1 Carrier: MQ Number: 3775 Origin: Dallas/Fort Worth TX Dest: Abilene TX Duration: 39 Capacity: 1 Price: 167
+Booked flight(s), reservation ID: 1
+You cannot book two flights in the same day
+Goodbye
+*

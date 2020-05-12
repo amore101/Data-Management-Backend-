@@ -1,0 +1,24 @@
+SELECT distinct l1.country as first_country, l2.country as second_country
+FROM
+(SELECT y.name as mountain, z.name as sea, c.name as country
+FROM geo.world x, x.mondial.mountain y, x.mondial.sea z, x.mondial.country c, split(y.`-country`, " ") s1, split(z.`-country`, " ") s2
+WHERE c.`-car_code` = s1
+AND c.`-car_code` = s2) l1,
+(SELECT y.name as mountain, z.name as sea, c.name as country
+FROM geo.world x, x.mondial.mountain y, x.mondial.sea z, x.mondial.country c, split(y.`-country`, " ") s1, split(z.`-country`, " ") s2
+WHERE c.`-car_code` = s1
+AND c.`-car_code` = s2) l2
+WHERE l1.country > l2.country
+AND l1.mountain = l2.mountain
+AND l1.sea = l2.sea;
+
+/*
+7 rows, 474.289 sec
+{ "first_country": "Spain", "second_country": "France" }
+{ "first_country": "Sweden", "second_country": "Norway" }
+{ "first_country": "Russia", "second_country": "Georgia" }
+{ "first_country": "United States", "second_country": "Canada" }
+{ "first_country": "Italy", "second_country": "France" }
+{ "first_country": "Chile", "second_country": "Argentina" }
+{ "first_country": "North Korea", "second_country": "China" }
+*/
